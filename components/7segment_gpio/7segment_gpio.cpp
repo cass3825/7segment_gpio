@@ -256,7 +256,7 @@ void IRAM_ATTR HOT LcdDigitsData::timer_interrupt() {
   cycles_to_skip = intensity_delay + (compensate_brightness ? bit_count : 0);
 }
 
-void LcdDigitsComponent::set_segment_pins(std::vector<GPIOPin *> segment_pins) {
+void LcdDigitsComponent::set_segment_pins(std::vector<GPIO *> segment_pins) {
   ESP_LOGV(TAG, "Setting up segment pins");
   assert(timer == nullptr);
   interrupt_data_.segment_pins = std::move(segment_pins);
@@ -264,19 +264,19 @@ void LcdDigitsComponent::set_segment_pins(std::vector<GPIOPin *> segment_pins) {
       std::min(size_t(8), interrupt_data_.segment_pins.size()));
 }
 
-void LcdDigitsComponent::set_degree_pin(GPIOPin *arg) {
+void LcdDigitsComponent::set_degree_pin(GPIO *arg) {
   ESP_LOGV(TAG, "Setting up degree pin");
   assert(timer == nullptr);
   interrupt_data_.degree_pin = arg;
 }
 
-void LcdDigitsComponent::set_colon_pin(GPIOPin *arg) {
+void LcdDigitsComponent::set_colon_pin(GPIO *arg) {
   ESP_LOGV(TAG, "Setting up colon");
   assert(timer == nullptr);
   interrupt_data_.colon_pin = arg;
 }
 
-void LcdDigitsComponent::set_digit_pins(std::vector<GPIOPin *> digit_pins) {
+void LcdDigitsComponent::set_digit_pins(std::vector<GPIO *> digit_pins) {
   ESP_LOGV(TAG, "Setting up digit pins");
   assert(timer == nullptr);
   interrupt_data_.digit_pins = std::move(digit_pins);
