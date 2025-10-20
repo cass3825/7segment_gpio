@@ -41,12 +41,12 @@ struct LcdData {
 enum DisplayType { CommonAnode, CommonCathode };
 
 struct LcdDigitsData : LcdData {
-  std::vector<GPIOPin *> digit_pins = {
+  std::vector<GPIO *> digit_pins = {
       nullptr}; // by default it will expect one pin connected to power rail so
                 // don't need any actions from library side.
-  std::vector<GPIOPin *> segment_pins;
-  GPIOPin *colon_pin = nullptr;
-  GPIOPin *degree_pin = nullptr;
+  std::vector<GPIO *> segment_pins;
+  GPIO *colon_pin = nullptr;
+  GPIO *degree_pin = nullptr;
   uint8_t cycles_to_skip = 0;
   uint8_t current_frame = 0;
   /**
