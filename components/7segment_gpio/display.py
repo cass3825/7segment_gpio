@@ -2,7 +2,7 @@ import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import display
 from esphome.const import CONF_ID, CONF_INTENSITY, CONF_LAMBDA
-from esphome.pins import gpio_output_pin_schema
+from esphome.pins import output_pin_schema
 from esphome.const import __version__ as ESPHOME_VERSION
 
 lcd_digits_ns = cg.esphome_ns.namespace("lcd_digits")
@@ -33,18 +33,18 @@ CONFIG_SCHEMA = (
         {
             cv.GenerateID(): cv.declare_id(LcdDigitsComponent),
             cv.Optional(CONF_DIGIT_PINS): cv.ensure_list(
-                            cv.string
+                            output_pin_schema
                         ),
             cv.Required(CONF_SEGMENT_PINS): cv.ensure_list(
-                            cv.string
+                            output_pin_schema
                         ),
             cv.Optional(CONF_INTENSITY, default=15): cv.int_range(min=0, max=15),
             cv.Optional(CONF_DISPLAY_TYPE, default="COMMON_ANODE"): cv.enum(DISPLAY_TYPE, upper=True),
             cv.Optional(CONF_ITERATE_DIGITS, default=True): cv.boolean,
             cv.Optional(CONF_COMPENSATE_BRIGHTNESS, default=False): cv.boolean,
             cv.Optional(CONF_INTENSITY, default=15): cv.int_range(min=0, max=15),
-            cv.Optional(CONF_COLON_PIN): cv.string,
-            cv.Optional(CONF_DEGREE_PIN): cv.string,
+            cv.Optional(CONF_COLON_PIN): output_pin_schema,
+            cv.Optional(CONF_DEGREE_PIN): output_pin_schema,
         }
     )
     .extend(cv.polling_component_schema("1s"))
