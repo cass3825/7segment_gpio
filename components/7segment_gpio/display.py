@@ -2,7 +2,7 @@ import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import display
 from esphome.const import CONF_ID, CONF_INTENSITY, CONF_LAMBDA
-from esphome.pins import output_pin_schema
+from esphome.pins import gpio_output_pin_schema
 from esphome.const import __version__ as ESPHOME_VERSION
 
 lcd_digits_ns = cg.esphome_ns.namespace("lcd_digits")
