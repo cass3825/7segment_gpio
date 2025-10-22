@@ -63,12 +63,12 @@ async def to_code(config):
     if CONF_DIGIT_PINS in config:
         digit_pins = []
         for pin_config in config[CONF_DIGIT_PINS]:
-            digit_pins.append(await cg.pin_expression(pin_config))
+            digit_pins.append(await cg.get_variable(pin_config))
         cg.add(var.set_digit_pins(digit_pins))
 
     segment_pins = []
     for pin_config in config[CONF_SEGMENT_PINS]:
-        segment_pins.append(await cg.pin_expression(pin_config))
+        segment_pins.append(await cg.get_variable(pin_config))
     cg.add(var.set_segment_pins(segment_pins))
     cg.add(var.set_display_type(config[CONF_DISPLAY_TYPE]))
     cg.add(var.set_iterate_digits(config[CONF_ITERATE_DIGITS]))
@@ -76,10 +76,10 @@ async def to_code(config):
     cg.add(var.set_intensity(config[CONF_INTENSITY]))
 
     if CONF_COLON_PIN in config:
-        cg.add(var.set_colon_pin(await cg.pin_expression(config[CONF_COLON_PIN])));
+        cg.add(var.set_colon_pin(await cg.get_variable(config[CONF_COLON_PIN])));
     
     if CONF_DEGREE_PIN in config:
-        cg.add(var.set_degree_pin(await cg.pin_expression(config[CONF_DEGREE_PIN])));
+        cg.add(var.set_degree_pin(await cg.get_variable(config[CONF_DEGREE_PIN])));
 
     if CONF_LAMBDA in config:
         lambda_ = await cg.process_lambda(
